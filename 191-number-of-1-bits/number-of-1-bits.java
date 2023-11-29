@@ -20,17 +20,24 @@ public class Solution {
 
 
         // =>APPROACH-I
-        int bit = 0;
-        int mask = 1;
+        // int bit = 0;
+        // int mask = 1;
 
-        for (int i = 0; i < 32; i++) {
-            if ((n & mask) != 0) bit++;
-            mask = mask << 1;
-        }
-        return bit;
+        // for (int i = 0; i < 32; i++) {
+        //     if ((n & mask) != 0) bit++;
+        //     mask = mask << 1;
+        // }
+        // return bit;
 
 
         // APPROACH-II
+        int bitCount =0;
+        while(n!=0)
+        {
+            bitCount++;
+            n = n&(n-1);
+        }
+        return bitCount;
 
 
     }
