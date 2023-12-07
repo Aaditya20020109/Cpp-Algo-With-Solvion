@@ -4,8 +4,8 @@ class Solution {
         Arrays.sort(height);
         int max = 0;
         for (int j = 0; j < height.length; j++) {
-            int base = height.length - j - 1;
-            int area = (height[j] + (height[j] * base));
+            int base = height.length - j ;
+            int area = (height[j] * base);
             System.out.print(area);
             max = Math.max(area, max);
         }
