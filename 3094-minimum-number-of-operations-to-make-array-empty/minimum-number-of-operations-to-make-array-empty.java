@@ -13,16 +13,24 @@ class Solution {
         
     }
     public int minOperations(int[] nums) {
+        //greedy
         HashMap<Integer, Integer> hm = new HashMap<>();
         for (int key : nums)
             hm.put(key, hm.getOrDefault(key, 0) + 1);
         int ans = 0;
        for(int key:hm.keySet())
        {
+        //    1-way
           
            int value = hm.get(key);
            if(value<2)return -1;
-           ans+=Count(value);
+        //    ans+=Count(value);
+
+
+        // 2-way
+        double div = (double)value/3;
+        ans+=Math.ceil(div);
+
        }
        return ans;
     }
