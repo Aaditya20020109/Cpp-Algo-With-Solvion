@@ -5,9 +5,7 @@ stack<int> min_stack;
 
     MinStack() {
         stack<int> st;
-
-        s = st;
-        min_stack = st;
+        s=min_stack=st;
 
         
     }
@@ -15,34 +13,36 @@ stack<int> min_stack;
     void push(int val) {
         if(s.empty())
         {
-            s.push(val);
-            min_stack.push(val);
+           s.push(val);
+           min_stack.push(val);
+
         }
-        else
+        else 
         {
             s.push(val);
             if(s.top()<min_stack.top())min_stack.push(s.top());
             else min_stack.push(min_stack.top());
-            
+            return ;
+
         }
-
-
+        
     }
     
     void pop() {
         if(s.empty())return;
         s.pop();
         min_stack.pop();
+        
     }
     
     int top() {
         return s.top();
-
         
     }
     
     int getMin() {
         return min_stack.top();
+        
     }
 };
 
