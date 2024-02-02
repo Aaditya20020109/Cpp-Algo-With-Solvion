@@ -2,19 +2,29 @@
 class Solution {
 public:
     int findDuplicate(vector<int>& nums) {
+        //floyd algorithme
+
+        int slow = nums[0];
+        int fast = nums[0];
+        slow = nums[slow];
+        fast = nums[fast];
+        fast  = nums[fast];
+        while(slow!=fast)
+        {
+             slow = nums[slow];
+        fast = nums[fast];
+        fast  = nums[fast];
+        }
+        slow = nums[0];
+        while(slow!=fast)
+        {
+            slow = nums[slow];
+            fast = nums[fast];
+
+        }
+        return slow;
        
-       vector<int> freq(nums.size()+1,0);
-       for(int e:nums)
-       {
-           freq[e]++;
-
-       }
-       for(int i=0;i<nums.size();i++)
-       {
-           if(freq[i]>1)return i;
-       }
-
-    return -1;
+      
         
     }
 };
