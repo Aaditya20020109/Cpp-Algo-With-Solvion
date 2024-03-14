@@ -1,22 +1,17 @@
 class Solution {
 public:
     bool containsDuplicate(vector<int>& nums) {
-        map<int,int> m;
-        sort(nums.begin(),nums.end());
-        map<int,int>::iterator it;
-        for(auto i:nums)
+        unordered_map<int,int> m;
+        for(int val:nums)
         {
-            if(m.find(i)!=m.end())
-            {
-                return true;
-
-            }
-            else
-            {
-                
-                m.insert({i,1});
-            }
+            m[val]++;
+        }
+        unordered_map<int,int>:: iterator it;
+        for(it=m.begin();it!=m.end();it++)
+        {
+            if(it->second > 1)return true;
         }
         return false;
+        
     }
 };
