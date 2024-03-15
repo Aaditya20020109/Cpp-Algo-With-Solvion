@@ -1,27 +1,26 @@
-class Solution
-{
-    public:
-        void rotate(vector<vector < int>> &matrix)
+class Solution {
+public:
+    void rotate(vector<vector<int>>& matrix) {
+
+        int n = matrix.size();
+        vector<int> v;
+        for(int j=0;j<n;j++)
         {
-            int rowLen = matrix.size();
-            int colLen = matrix[0].size();
-
-            vector<int> v;
-
-            for (int i = 0; i < colLen; i++)
+            for(int i=n-1;i>=0;i--)
             {
-                for (int j = rowLen-1; j >=0; j--)
-                {
-                    v.push_back(matrix[j][i]);
-                }
-            }
-            int k=0;
-            for (int i = 0; i < rowLen; i++)
-            {
-                for (int j = 0; j < colLen; j++)
-                {
-                    matrix[i][j] = v[k++];
-                }
+                v.push_back(matrix[i][j]);
             }
         }
+
+        int idx =0;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                matrix[i][j] = v[idx++];
+            }
+        }
+
+        
+    }
 };
