@@ -1,30 +1,19 @@
-
 class Solution {
 public:
     int findDuplicate(vector<int>& nums) {
-        //floyd algorithme
-
-        int slow = nums[0];
-        int fast = nums[0];
-        slow = nums[slow];
-        fast = nums[fast];
-        fast  = nums[fast];
-        while(slow!=fast)
+        unordered_map<int,int> m;
+        for(int n:nums)
         {
-             slow = nums[slow];
-        fast = nums[fast];
-        fast  = nums[fast];
+            m[n]++;
         }
-        slow = nums[0];
-        while(slow!=fast)
-        {
-            slow = nums[slow];
-            fast = nums[fast];
 
+        unordered_map<int,int> ::iterator it = m.begin();
+        while(it!=m.end())
+        {
+            if(it->second>=2)return it->first;
+            it++;
         }
-        return slow;
-       
-      
+        return -1;
         
     }
 };
