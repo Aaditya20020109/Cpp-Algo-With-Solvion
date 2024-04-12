@@ -1,41 +1,49 @@
 class Solution {
 public:
     vector<int> deckRevealedIncreasing(vector<int>& deck) {
+        
+
+        queue<int> q;
+
         int n = deck.size();
 
-        vector<int> result(n,0);
-
-        bool skip  = false;
-
-        int i=0,j=0;
+        for(int i=0;i<n;i++)
+        q.push(i);
 
         sort(begin(deck),end(deck));
 
+        vector<int> ans(n,0);
+        int i=0;
 
 
-
-        while(i < n)
+        while(!q.empty())
         {
-            if(result[j] == 0)
+            int idx = q.front();
+
+            q.pop();
+
+            
+
+            ans[idx] = deck[i];
+            
+            i+=1;
+
+            if( !q.empty() )
             {
-                if(skip == false)
-                {
-                    result[j] = deck[i];
-                    i+=1;
+                q.push(q.front());
+                q.pop();
+                
 
-
-                }
-
-                skip =! skip;
 
             }
 
-
-
-            j = (j+1)%n;
         }
 
-        return result;
-        
+        return ans;
+
+
+
+
+
     }
 };
