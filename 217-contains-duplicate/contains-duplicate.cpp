@@ -1,15 +1,12 @@
 class Solution {
 public:
     bool containsDuplicate(vector<int>& nums) {
-        unordered_map<int,int> m;
-        for(int val:nums)
+        // greedy approach
+        if(nums.size() == 1)return false;
+        sort(nums.begin() , nums.end());
+        for(int i=0 ; i<nums.size()-1 ; i++)
         {
-            m[val]++;
-        }
-        unordered_map<int,int>:: iterator it;
-        for(it=m.begin();it!=m.end();it++)
-        {
-            if(it->second > 1)return true;
+            if(nums[i] == nums[i+1])return true;
         }
         return false;
         
