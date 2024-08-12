@@ -1,28 +1,44 @@
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
-        int n = prices.size();
-        int left[n];
-        int right[n];
-        memset(left,0,sizeof(left));
-        memset(right,0,sizeof(right));
-        left[0] = prices[0];
-        right[n-1] = prices[n-1];
-        for(int i=1;i<n;i++)
+        int pricesArrLen = prices.size() ;
+
+        vector<int> leftSideGreaterNum(pricesArrLen , 0 );
+
+        vector<int> rightSideGreaterNum(pricesArrLen , 0 );
+
+        // assign the first number leftSideGreaterNum
+        leftSideGreaterNum[pricesArrLen-1] = prices[pricesArrLen-1];
+
+        // assign the first number rightSideGreaterNum
+        rightSideGreaterNum[0] = prices[0];
+
+
+        // left ---> right
+        for(int i=1 ; i < prices.size() ; i++)
         {
-            left[i] = min(left[i-1],prices[i]);
-        }
-        
-        for(int i=n-2;i>=0;i--)
+
+            rightSideGreaterNum[i] = min(rightSideGreaterNum[i-1] , prices[i]);
+
+        }  
+
+
+        // right --> left
+
+        for(int i= pricesArrLen-2 ; i >=0 ; i--)
         {
-            right[i] = max(right[i+1],prices[i]);
-        }
-        int max_profit = 0;
-        for(int i=0;i<n;i++)
+
+            leftSideGreaterNum[i] = max(leftSideGreaterNum[i+1] , prices[i]);
+
+
+        } 
+        int maxProfit = 0;
+        for(int i= 0;i<pricesArrLen ; i++)
         {
-            int profit = abs(right[i]-left[i]);
-            max_profit = max(profit,max_profit);
-        }
-        return max_profit;
+            maxProfit = max(maxProfit , abs(leftSideGreaterNum[i]-rightSideGreaterNum[i]));
+
+        }   
+
+        return maxProfit;  
     }
 };
