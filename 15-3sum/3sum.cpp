@@ -19,8 +19,8 @@ public:
                 {
                     res.push_back({nums[i],nums[j] , nums[k]});
                      j++;
-                     while(j > i+1 && nums[j] == nums[j-1] && j<k )j+=1;
-                    //  k-=1;
+                    
+                   
                   
                 }
                 else{
@@ -31,7 +31,7 @@ public:
                         j+=1;
                     }
                 }
-
+                 while(j > i+1 && nums[j] == nums[j-1] && j<k )j+=1;
 
                  
             }
