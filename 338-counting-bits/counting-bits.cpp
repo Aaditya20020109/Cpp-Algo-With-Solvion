@@ -1,23 +1,35 @@
 class Solution {
 public:
-    int count_setbits(int n)
-    {
-        int set_bits =0;
-        while(n!=0)
+
+int hammingWeight(int n) {
+        int count = 0;
+        for(int i =0 ; i<32 ; i++)
         {
-            set_bits++
-            ;
-            n = n&(n-1);
+            int ith_bitvalue = (1&(n>>i));
+            if(ith_bitvalue == 1)
+            {
+                count+=1;
+            }
+
+
         }
-        return set_bits;
+        return count;
+        
     }
     vector<int> countBits(int n) {
-        vector<int> res(n+1);
-        for(int i=0;i<res.size();i++)
+        vector<int> ans;
+        int i = 0 ;
+
+        while(i<=n)
         {
-            res[i] = count_setbits(i);
+            int total_bits = hammingWeight(i)
+            ;
+            ans.push_back(total_bits);
+
+            i++;
         }
-        return res;
+
+        return ans ;
         
     }
 };
