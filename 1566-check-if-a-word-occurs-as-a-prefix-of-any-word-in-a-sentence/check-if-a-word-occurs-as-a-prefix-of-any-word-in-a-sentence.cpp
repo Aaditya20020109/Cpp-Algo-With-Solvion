@@ -1,16 +1,9 @@
 class Solution {
 public:
-vector<string> v;
-// this is first approach
+
 int helper(string s1 , string s2)
 {
-v.push_back(s1);
-for(auto it:v)
-    {
-        cout<<it;
-        cout<<" ";
-    }
-    cout<<endl;
+
 if(s1.size() < s2.size())return -1;
 
 int i=0 , j = s2.size();
