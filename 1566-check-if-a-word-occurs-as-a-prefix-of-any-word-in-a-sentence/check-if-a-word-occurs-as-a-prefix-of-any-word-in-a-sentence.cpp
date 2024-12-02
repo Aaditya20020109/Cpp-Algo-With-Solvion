@@ -1,6 +1,7 @@
 class Solution {
 public:
 vector<string> v;
+// this is first approach
 int helper(string s1 , string s2)
 {
 v.push_back(s1);
