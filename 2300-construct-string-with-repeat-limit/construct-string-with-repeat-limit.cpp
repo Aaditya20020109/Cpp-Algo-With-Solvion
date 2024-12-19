@@ -1,50 +1,47 @@
 class Solution {
 public:
     string repeatLimitedString(string s, int repeatLimit) {
-        int n  = s.size();
+        int n = s.size();
 
         string res;
 
-        vector<int> count(26,0);
-        for(char& ch:s)
+        vector<int> count(26, 0);
+        priority_queue<char> pq;
+        for (char& ch : s) {
+            count[ch - 'a']++;
+           
+        }
+
+        for(int i = 0 ; i<26 ; i++)
         {
-            count[ch-'a']++;
+            if(count[i ] > 0)
+            {
+                char ch = i + 'a';
+                pq.push(ch);
+            }
         }
         int i = 25;
 
-        while(i>=0)
-        {
-            if(count[i] == 0)
-            {
-                i--;
-                continue;
+        while (!pq.empty()) {
+            char ch = pq.top();
+            pq.pop();
 
+            int freq = min(count[ch - 'a'], repeatLimit);
+
+            res.append(freq, ch);
+            count[ch - 'a'] -= freq;
+
+            if (count[ch - 'a'] > 0 && !pq.empty()) {
+                char ch2 = pq.top();
+                pq.pop();
+                res.push_back(ch2);
+                count[ch2 - 'a']--;
+                if (count[ch2 - 'a'] > 0)
+                    pq.push(ch2);
+                pq.push(ch);
             }
-
-            int freq = min(count[i] , repeatLimit);
-            char ch = 'a' + i;
-            res.append(freq , ch);
-            count[i]-=freq;
-
-            if(count[i] > 0)
-            {
-                int j = i-1;
-               while(j>=0 && count[j] == 0)
-               {
-                j--;
-
-               }
-               if(j<0)break;
-               res.push_back('a'+j);
-               count[j]--;
-
-            }
-
-
-
         }
 
         return res;
-        
     }
 };
