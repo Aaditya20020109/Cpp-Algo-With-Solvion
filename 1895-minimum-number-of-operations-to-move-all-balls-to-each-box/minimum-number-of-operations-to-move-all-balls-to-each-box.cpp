@@ -2,44 +2,47 @@ class Solution {
 public:
     vector<int> minOperations(string boxes) {
 
-        int n = boxes.size();
+     int numberOfBoxes = boxes.size();
 
-        vector<int> leftCount(n, 0);
-        vector<int> rightCount(n, 0);
+vector<int> leftBoxCount(numberOfBoxes, 0);
+vector<int> rightBoxCount(numberOfBoxes, 0);
 
-        for (int i = 1; i < n; i++) {
-            leftCount[i] += leftCount[i - 1];
-            if (boxes[i - 1] == '1')
-                leftCount[i]++;
-        }
+// Calculate left box counts
+for (int i = 1; i < numberOfBoxes; i++) {
+    leftBoxCount[i] += leftBoxCount[i - 1];
+    if (boxes[i - 1] == '1') {
+        leftBoxCount[i]++;
+    }
+}
 
-        for (int i = n - 2; i >= 0; i--) {
-            rightCount[i] += rightCount[i + 1];
-            if (boxes[i + 1] == '1')
-                rightCount[i] += 1;
-        }
+// Calculate right box counts
+for (int i = numberOfBoxes - 2; i >= 0; i--) {
+    rightBoxCount[i] += rightBoxCount[i + 1];
+    if (boxes[i + 1] == '1') {
+        rightBoxCount[i]++;
+    }
+}
 
-      
+vector<int> totalLeftDistance(numberOfBoxes, 0);
+vector<int> totalRightDistance(numberOfBoxes, 0);
+vector<int> result(numberOfBoxes, 0);
 
-        vector<int> left(n, 0);
-        vector<int> right(n, 0);
+// Calculate total left distances
+for (int i = 1; i < numberOfBoxes; i++) {
+    totalLeftDistance[i] = totalLeftDistance[i - 1] + leftBoxCount[i];
+}
 
-        vector<int> res(n, 0);
+// Calculate total right distances
+for (int i = numberOfBoxes - 2; i >= 0; i--) {
+    totalRightDistance[i] = totalRightDistance[i + 1] + rightBoxCount[i];
+}
 
-        // left
-        for (int i = 1; i < n; i++) {
-            left[i] = left[i - 1] + leftCount[i];
-        }
+// Combine left and right distances for the final result
+for (int i = 0; i < numberOfBoxes; i++) {
+    result[i] = totalLeftDistance[i] + totalRightDistance[i];
+}
 
-        // right
-        for (int i = n - 2; i >= 0; i--) {
-            right[i] = right[i + 1] + rightCount[i];
-        }
+return result;
 
-        for (int i = 0; i < n; i++) {
-            res[i] = left[i] + right[i];
-        }
-
-        return res;
     }
 };
