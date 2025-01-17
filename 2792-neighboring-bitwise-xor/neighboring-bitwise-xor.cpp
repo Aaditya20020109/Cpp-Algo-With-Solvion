@@ -5,9 +5,9 @@ public:
         int n = nums.size();
         for(int i=0 ; i<n ; i++)
         {
-              int firstIdx = i , secondIdx =(i+1)%n;
+              int currIdx = i , nextIdx =(i+1)%n;
 
-              if(nums[firstIdx]^nums[secondIdx] != derived[firstIdx])return false;
+              if(nums[currIdx]^nums[nextIdx] != derived[currIdx])return false;
            
            
 
@@ -22,9 +22,9 @@ public:
 
         for(int i=0 ; i<n ; i++)
         {
-            int firstIdx = i , secondIdx =(i+1)%n;
+            int currIdx = i , nextIdx =(i+1)%n;
            
-            nums[secondIdx] = derived[firstIdx]^nums[firstIdx];
+            nums[nextIdx] = derived[currIdx]^nums[currIdx];
 
 
            
