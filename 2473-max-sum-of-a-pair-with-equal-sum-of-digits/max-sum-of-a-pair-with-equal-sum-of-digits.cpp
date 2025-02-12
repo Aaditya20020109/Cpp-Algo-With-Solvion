@@ -36,13 +36,12 @@ public:
                 // int first_index = 0 , last_index = it->second.size()-1;
                 // maximum_digitSum = max((it->second[first_index]+it->second[last_index]) , maximum_digitSum );
 
-                for(int i=0 ; i<it->second.size()-1 ; i++)
+                for(int i=1 ; i<it->second.size() ; i++)
                 {
-                    for(int j=i+1 ; j<it->second.size() ; j++)
-                    {
-                        int sum = it->second[i] + it->second[j];
+                    
+                        int sum = it->second[i] + it->second[i-1];
                         maximum_digitSum = max(sum , maximum_digitSum);
-                    }
+                    
                 }
 
             }
