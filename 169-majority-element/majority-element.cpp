@@ -2,21 +2,26 @@ class Solution {
 public:
     int majorityElement(vector<int>& nums) {
 
-        unordered_map<int,int> m;
-        int target = (int)nums.size()/2;
-        for(int e:nums)
-        {
-            m[e]++;
-        }
+        int res = 0;
+        int mazority = 0;
 
-        for(auto it=m.begin() ; it!=m.end() ; it++)
+        for(int n:nums)
         {
-            if(it->second > target)
+            if(mazority == 0)
             {
-                return it->first;
+                res = n;
+
+            }
+
+            if(res == n)
+            {
+                mazority+=1;
+            }else {
+                mazority-=1;
             }
         }
-    return -1;
+
+        return res;
       
     }
 };
